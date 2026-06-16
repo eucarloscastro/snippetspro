@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SnippetsPro — Personalizações que dão resultado na sua loja, sem mexer no tema</title>
+<meta name="description" content="Códigos sob medida para e-commerce (Nuvemshop, Shopify e mais). Você me manda seu site, eu gero o código, você cola no Google Tag Manager. Sem senha, sem risco.">
+<style>
+  :root{
+    --bg:#0e1116; --bg2:#151a22; --card:#1a212b; --line:#2a3340;
+    --txt:#eef2f7; --muted:#9aa6b5; --accent:#1aab8a; --accent2:#14c8a0;
+    --gold:#f4b740; --danger:#ff5a5a; --radius:14px;
+    --wa:#25d366;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
+  .accent{color:var(--accent2)}
+  .pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:5px 12px;border-radius:30px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(14,17,22,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+  .logo{font-weight:800;font-size:19px;letter-spacing:-.3px}
+  .logo b{color:var(--accent2)}
+  .wa-btn{display:inline-flex;align-items:center;gap:7px;background:var(--wa);color:#06311c;font-weight:700;font-size:14px;padding:9px 15px;border-radius:10px;transition:transform .15s}
+  .wa-btn:hover{transform:translateY(-1px)}
+  .wa-btn svg{width:17px;height:17px}
+
+  /* hero */
+  .hero{text-align:center;padding:54px 0 40px}
+  .hero .pill{background:rgba(26,171,138,.14);color:var(--accent2);border:1px solid rgba(26,171,138,.35);margin-bottom:18px}
+  .hero h1{font-size:34px;line-height:1.15;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+  .hero p{color:var(--muted);font-size:17px;max-width:540px;margin:0 auto 26px}
+  .hero .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:13px 22px;border-radius:11px;cursor:pointer;border:0;transition:transform .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--wa);color:#06311c}
+  .btn-ghost{background:transparent;color:var(--txt);border:1.5px solid var(--line)}
+
+  /* steps */
+  .section{padding:38px 0}
+  .section h2{font-size:24px;font-weight:800;letter-spacing:-.3px;text-align:center;margin-bottom:8px}
+  .section .sub{color:var(--muted);text-align:center;font-size:15px;max-width:480px;margin:0 auto 28px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .step{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 16px;text-align:center}
+  .step .n{width:34px;height:34px;border-radius:50%;background:rgba(26,171,138,.15);color:var(--accent2);font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+  .step h3{font-size:15px;margin-bottom:5px}
+  .step p{font-size:13px;color:var(--muted)}
+
+  /* catalog */
+  .cards{display:grid;gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .card-top{padding:20px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .card-title{font-size:19px;font-weight:800;letter-spacing:-.3px}
+  .card-tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap}
+  .tag-ready{background:rgba(26,171,138,.16);color:var(--accent2)}
+  .tag-soon{background:rgba(244,183,64,.14);color:var(--gold)}
+  .card-desc{padding:8px 20px 0;color:var(--muted);font-size:14.5px}
+  .demo{margin:16px 20px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg)}
+  .demo-head{display:grid;grid-template-columns:1fr 1fr;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .demo-head span{padding:7px 12px}
+  .demo-head span:first-child{border-right:1px solid var(--line)}
+  .demo-body{display:grid;grid-template-columns:1fr 1fr}
+  .demo-cell{padding:16px 14px;font-size:14px}
+  .demo-cell:first-child{border-right:1px solid var(--line)}
+  .price-old{color:var(--muted);font-weight:700}
+  .price-now{font-weight:800;font-size:17px}
+  /* pix badge demo */
+  .pixb{display:inline-block;margin-top:8px;padding:6px 11px;border-radius:8px;background:rgba(26,171,138,.10);border:1px solid rgba(26,171,138,.35);line-height:1.2}
+  .pixb .v{font-size:17px;font-weight:800;color:var(--accent2)}
+  .pixb .l{font-size:12px;font-weight:600;color:var(--accent2);margin-left:3px}
+  .pixb .o{display:inline-block;margin-left:7px;padding:2px 7px;border-radius:20px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;vertical-align:middle}
+  .btn-cart{display:inline-block;margin-top:6px;padding:9px 14px;border-radius:8px;font-weight:700;font-size:13px}
+  .btn-stuck{background:#3a3030;color:#caa;cursor:not-allowed}
+  .btn-ok{background:var(--accent);color:#fff}
+  .dead{display:block;margin-top:6px;font-size:11px;color:var(--danger)}
+  .resgate-mini{display:flex;gap:6px;margin-top:8px}
+  .resgate-mini i{flex:1;height:38px;border-radius:6px;background:#2a3340;display:block}
+  .err404{font-weight:800;color:var(--danger);font-size:22px}
+
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 14px 4px}
+  .shots figure{margin:0}
+  .shots figcaption{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+  .shots .lb-antes{color:var(--danger)}
+  .shots .lb-depois{color:var(--accent2)}
+  .shots img{width:100%;border:1px solid var(--line);border-radius:8px;display:block;background:#fff}
+  .shots-cap{font-size:11px;color:var(--muted);text-align:center;padding:8px 0 0}
+  .shots-cap b{color:var(--accent2)}
+
+  .card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 20px;flex-wrap:wrap}
+  .price{font-size:15px;color:var(--muted)}
+  .price b{font-size:26px;color:var(--txt);font-weight:800}
+  .card-foot .wa-btn{font-size:14px;padding:11px 18px}
+
+  /* combo */
+  .combo{background:linear-gradient(135deg,#13241f,#102a23);border:1px solid rgba(26,171,138,.4)}
+  .combo .card-title{color:var(--accent2)}
+
+  /* recurring */
+  .rec{display:flex;align-items:center;gap:14px;background:var(--bg2);border:1px dashed var(--line);border-radius:var(--radius);padding:18px 20px;flex-wrap:wrap}
+  .rec .ic{font-size:26px}
+  .rec div{flex:1;min-width:200px}
+  .rec h3{font-size:16px;margin-bottom:3px}
+  .rec p{font-size:13.5px;color:var(--muted)}
+  .rec .rp{font-weight:800;font-size:18px;white-space:nowrap}
+
+  /* proof */
+  .proof{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;text-align:center}
+  .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .stat b{display:block;font-size:28px;font-weight:800;color:var(--accent2)}
+  .stat span{font-size:12.5px;color:var(--muted)}
+  .proof q{display:block;font-style:italic;color:var(--muted);font-size:15px;max-width:520px;margin:0 auto}
+
+  /* faq */
+  .faq details{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:var(--bg2)}
+  .faq summary{cursor:pointer;padding:15px 18px;font-weight:700;font-size:15px;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:'+';float:right;color:var(--accent2);font-weight:800}
+  .faq details[open] summary::after{content:'–'}
+  .faq p{padding:0 18px 16px;color:var(--muted);font-size:14px}
+
+  /* final cta */
+  .final{text-align:center;background:linear-gradient(135deg,#13241f,#0e1116);border:1px solid var(--line);border-radius:18px;padding:40px 24px;margin:10px 0}
+  .final h2{font-size:26px;margin-bottom:10px}
+  .final p{color:var(--muted);margin-bottom:22px}
+
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 0 40px}
+  footer b{color:var(--txt)}
+
+  @media(max-width:560px){
+    .hero h1{font-size:27px}
+    .steps{grid-template-columns:1fr}
+    .proof-grid{grid-template-columns:1fr}
+    .demo-cell{font-size:13px}
+  }
+</style>
+</head>
+<body>
+
+<!-- =============== HEADER =============== -->
+<header>
+  <div class="wrap hd">
+    <div class="logo">Snippets<b>Pro</b></div>
+    <a class="wa-btn" href="https://wa.me/5511963429300?text=Oi!%20Vim%20do%20site%20da%20SnippetsPro%20e%20quero%20saber%20mais." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.5-4.1-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.6.2.4.9 1.4 1.9 2 .7.5 1.3.7 1.5.6.2-.1.4-.4.6-.7.2-.2.3-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<!-- =============== HERO =============== -->
+<section class="hero wrap">
+  <span class="pill">Sem senha · Sem risco · Sem mexer no tema</span>
+  <h1>Personalizações que <span class="accent">vendem mais</span> na sua loja — sem mexer no seu site</h1>
+  <p>Você me manda o link da sua loja. Eu gero um código sob medida. Você cola no Google Tag Manager em 2 minutos. Pronto: funciona na hora, e dá pra remover quando quiser.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#catalogo">Ver o catálogo ↓</a>
+    <a class="btn btn-ghost" href="https://wa.me/5511963429300?text=Oi!%20Quero%20uma%20personaliza%C3%A7%C3%A3o%20pra%20minha%20loja." target="_blank" rel="noopener">Falar comigo</a>
+  </div>
+</section>
+
+<!-- =============== COMO FUNCIONA =============== -->
+<section class="section wrap">
+  <h2>Como funciona</h2>
+  <p class="sub">Nada de acesso ao seu painel, FTP ou senha. Tudo roda pelo Google Tag Manager.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Você me manda o site</h3><p>O link da sua loja e o que você quer destacar.</p></div>
+    <div class="step"><div class="n">2</div><h3>Eu gero o código</h3><p>Adaptado ao seu tema, testado antes de entregar.</p></div>
+    <div class="step"><div class="n">3</div><h3>Você cola no GTM</h3><p>Um "copiar e colar". Eu te mando o passo a passo.</p></div>
+  </div>
+</section>
+
+<!-- =============== CATÁLOGO =============== -->
+<section class="section wrap" id="catalogo">
+  <h2>Catálogo de snippets</h2>
+  <p class="sub">Preço fixo, código real, demonstração antes/depois. Sem surpresa.</p>
+
+  <div class="cards">
+
+    <!-- PIX -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">💸 Destaque do preço no Pix</div>
+        <span class="card-tag tag-ready">Pronto</span>
+      </div>
+      <p class="card-desc">Mostra, embaixo do preço, o valor com desconto no Pix + selo "% OFF à vista". Funciona na página do produto e nas listagens, e atualiza sozinho quando o cliente troca a variação.</p>
+      <div class="demo">
+        <div class="shots">
+          <figure><figcaption class="lb-antes">● Antes</figcaption><img src="assets/pix-antes.png" alt="Preço sem destaque de Pix" loading="lazy"></figure>
+          <figure><figcaption class="lb-depois">● Depois</figcaption><img src="assets/pix-depois.png" alt="Preço com selo de Pix em destaque" loading="lazy"></figure>
+        </div>
+        <div class="shots-cap"><b>Print real</b> · loja Baixa Pace</div>
+      </div>
+      <div class="card-foot">
+        <div class="price"><b>R$ 147</b> · à vista</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Destaque%20do%20pre%C3%A7o%20no%20Pix%20(R%24147)%20pra%20minha%20loja.">Quero esse</a>
+      </div>
+    </article>
+
+    <!-- FIX ADD TO CART -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">🛒 Destravar "Adicionar ao carrinho"</div>
+        <span class="card-tag tag-ready">Pronto</span>
+      </div>
+      <p class="card-desc">Botão que congela em "Incluindo..." e nunca volta? É bug de tema que faz o cliente desistir. Esse código destrava o botão e devolve a venda — sem reescrever o tema.</p>
+      <div class="demo">
+        <div class="shots">
+          <figure><figcaption class="lb-antes">● Antes — travado</figcaption><img src="assets/cart-antes.png" alt="Botão preso em Incluindo..." loading="lazy"></figure>
+          <figure><figcaption class="lb-depois">● Depois — destravado</figcaption><img src="assets/cart-depois.png" alt="Botão Adicionar ao carrinho funcionando" loading="lazy"></figure>
+        </div>
+        <div class="shots-cap"><b>Print real</b> · botão volta sozinho em ~2,5s</div>
+      </div>
+      <div class="card-foot">
+        <div class="price"><b>R$ 297</b> · à vista</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Destravar%20Adicionar%20ao%20carrinho%20(R%24297)%20pra%20minha%20loja.">Quero esse</a>
+      </div>
+    </article>
+
+    <!-- 404 RESGATE -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">🏁 Página 404 de Resgate</div>
+        <span class="card-tag tag-ready">Pronto</span>
+      </div>
+      <p class="card-desc">Produto esgotado ou link quebrado vira uma vitrine de recomendados (mais vendidos, lançamentos, promoção) + botão de WhatsApp. Em vez de perder o visitante numa página de erro, você reaproveita o tráfego.</p>
+      <div class="demo">
+        <div class="shots">
+          <figure><figcaption class="lb-antes">● Antes — erro 404</figcaption><img src="assets/404-antes.png" alt="Página de erro 404 padrão" loading="lazy"></figure>
+          <figure><figcaption class="lb-depois">● Depois — vitrine de resgate</figcaption><img src="assets/404-depois.png" alt="Página 404 transformada em vitrine de recomendados" loading="lazy"></figure>
+        </div>
+        <div class="shots-cap"><b>Print real</b> · rodando ao vivo na Baixa Pace</div>
+      </div>
+      <div class="card-foot">
+        <div class="price"><b>R$ 497</b> · à vista</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20P%C3%A1gina%20404%20de%20Resgate%20(R%24497)%20pra%20minha%20loja.">Quero esse</a>
+      </div>
+    </article>
+
+    <!-- FRETE GRÁTIS (em breve) -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">🚚 Barra de frete grátis</div>
+        <span class="card-tag tag-soon">Em breve</span>
+      </div>
+      <p class="card-desc">"Faltam R$ 39 pra você ganhar frete grátis" — barra de progresso que aumenta o ticket médio. Já posso fazer sob encomenda; me chama no WhatsApp.</p>
+      <div class="card-foot">
+        <div class="price"><b>R$ 147</b> · à vista</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Tenho%20interesse%20na%20Barra%20de%20frete%20gr%C3%A1tis%20(R%24147).">Tenho interesse</a>
+      </div>
+    </article>
+
+    <!-- PROVA SOCIAL (em breve) -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">🔥 Prova social dinâmica</div>
+        <span class="card-tag tag-soon">Em breve</span>
+      </div>
+      <p class="card-desc">"12 pessoas compraram nas últimas 24h" e selos de confiança no checkout. Aumenta a conversão com urgência real. Sob encomenda.</p>
+      <div class="card-foot">
+        <div class="price"><b>R$ 147</b> · à vista</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Tenho%20interesse%20na%20Prova%20social%20din%C3%A2mica%20(R%24147).">Tenho interesse</a>
+      </div>
+    </article>
+
+    <!-- COMBO -->
+    <article class="card combo">
+      <div class="card-top">
+        <div class="card-title">⭐ Combo "Loja Turbinada"</div>
+        <span class="card-tag tag-ready">Melhor custo</span>
+      </div>
+      <p class="card-desc">Escolha <b>3 snippets</b> à sua escolha e economize ~R$ 150. Ideal pra quem quer destravar conversão de uma vez só.</p>
+      <div class="card-foot">
+        <div class="price"><b>R$ 697</b> · 3 snippets</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20Combo%20Loja%20Turbinada%20(R%24697%2C%203%20snippets).">Montar meu combo</a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- RECORRENTE -->
+  <div class="rec" style="margin-top:16px">
+    <div class="ic">🛡️</div>
+    <div>
+      <h3>Garantia + Ajustes</h3>
+      <p>Se o seu tema atualizar e algum snippet parar, eu conserto. Plano opcional de manutenção.</p>
+    </div>
+    <div class="rp accent">R$ 47<span style="font-size:13px;color:var(--muted)">/mês</span></div>
+  </div>
+</section>
+
+<!-- =============== PROVA =============== -->
+<section class="section wrap">
+  <div class="proof">
+    <span class="pill" style="background:rgba(26,171,138,.14);color:var(--accent2)">Resultado real</span>
+    <div class="proof-grid">
+      <div class="stat"><b>+977</b><span>cliques mortos recuperados num único bug de botão</span></div>
+      <div class="stat"><b>2,5s</b><span>pra botão travado voltar a funcionar</span></div>
+      <div class="stat"><b>0</b><span>acessos ao seu tema ou senha</span></div>
+    </div>
+    <q style="margin-top:20px">"Esses códigos foram criados e validados ao vivo numa loja real de e-commerce, no tráfego de verdade — não em teoria."</q>
+  </div>
+</section>
+
+<!-- =============== FAQ =============== -->
+<section class="section wrap faq">
+  <h2 style="margin-bottom:22px">Perguntas frequentes</h2>
+  <details><summary>Funciona na minha plataforma?</summary><p>Funciona em qualquer loja que aceite Google Tag Manager — Nuvemshop, Shopify, Loja Integrada, Tray, WooCommerce e outras. Me manda o link que eu confirmo antes de cobrar.</p></details>
+  <details><summary>Preciso te dar acesso ao meu painel?</summary><p>Não. Você só cola o código no seu próprio Google Tag Manager. Nenhuma senha, nenhum FTP, nenhum acesso ao tema.</p></details>
+  <details><summary>E se eu quiser remover depois?</summary><p>É só apagar a tag no GTM. Nada fica gravado no seu tema, então a remoção é instantânea e sem rastro.</p></details>
+  <details><summary>Quanto tempo demora a entrega?</summary><p>Snippets prontos saem em até 48h depois que recebo seu link. Os "sob encomenda" eu confirmo o prazo no WhatsApp.</p></details>
+  <details><summary>Como eu pago?</summary><p>Pix à vista. Você recebe o código + o passo a passo de instalação. Se precisar, eu instalo junto com você por chamada.</p></details>
+</section>
+
+<!-- =============== CTA FINAL =============== -->
+<section class="wrap">
+  <div class="final">
+    <h2>Bora destravar sua loja?</h2>
+    <p>Me manda o link da sua loja agora. Em poucos minutos eu te digo o que dá pra melhorar.</p>
+    <a class="btn btn-primary" href="https://wa.me/5511963429300?text=Oi!%20Quero%20personalizar%20minha%20loja%20com%20a%20SnippetsPro.%20O%20link%20%C3%A9%3A%20" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.5-4.1-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.6.2.4.9 1.4 1.9 2 .7.5 1.3.7 1.5.6.2-.1.4-.4.6-.7.2-.2.3-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>
+      Chamar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <b>SnippetsPro</b> · Personalizações de e-commerce sob medida<br>
+  WhatsApp (11) 96342-9300 · feito pra lojistas que querem vender mais sem dor de cabeça
+</footer>
+
+</body>
+</html>

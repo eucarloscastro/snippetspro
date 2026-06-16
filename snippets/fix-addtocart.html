@@ -1,0 +1,81 @@
+<!--
+  SnippetsPro — Destravar botão "Adicionar ao carrinho"
+  =====================================================
+  PROBLEMA QUE RESOLVE: em muitos temas (Nuvemshop) com customização de
+  agência, quando o add-to-cart falha o handler de erro chama variáveis
+  que não existem (ex.: $productButtonAdding is not defined) e o botão
+  congela pra sempre em "Incluindo...". Isso vira dead click e perda de venda.
+
+  COMO RESOLVE (sem mexer no tema / FTP):
+    1) Define stubs no window pras variáveis que o tema espera, evitando
+       o ReferenceError que quebra o callback de erro.
+    2) Rede de segurança: a cada 1s, qualquer botão preso em estado
+       "adicionando" há mais de 4s é resetado pro texto original.
+
+  ONDE COLAR: Google Tag Manager → Tags → Custom HTML
+  GATILHO: "All Pages" (Page View). "Support document.write" = NÃO.
+
+  PERSONALIZAR: ADDING_CLASS e BTN_SELECTOR caso o tema use nomes diferentes.
+-->
+<script>
+(function () {
+  "use strict";
+
+  /* ============ CONFIG ============ */
+  var ADDING_CLASS = "is-adding";          // classe do estado "Incluindo..."
+  var BTN_SELECTOR = ".js-addtocart, [data-component='product.add-to-cart']";
+  var STUCK_MS = 4000;                      // tempo até considerar o botão "preso"
+  var DEFAULT_LABEL = "Adicionar ao carrinho";
+  /* ============ /CONFIG ============ */
+
+  if (window.__snpCartFix) return;
+  window.__snpCartFix = true;
+
+  // 1) stubs pras variáveis que o tema referencia no callback_error
+  //    (não sobrescreve se o tema já as definiu corretamente)
+  ["$productButtonAdding", "$productButtonText", "$productButtonPlaceholder"].forEach(function (k) {
+    if (typeof window[k] === "undefined") window[k] = "";
+  });
+
+  function originalLabel(btn) {
+    return btn.getAttribute("data-snp-label")
+        || btn.getAttribute("data-original-text")
+        || DEFAULT_LABEL;
+  }
+
+  // guarda o texto original do botão na primeira vez que o vemos "normal"
+  function remember(btn) {
+    if (!btn.classList.contains(ADDING_CLASS) && !btn.getAttribute("data-snp-label")) {
+      var txt = (btn.textContent || "").trim();
+      if (txt) btn.setAttribute("data-snp-label", txt);
+    }
+  }
+
+  function unstick(btn) {
+    btn.classList.remove(ADDING_CLASS);
+    btn.removeAttribute("disabled");
+    // só reescreve o texto se o botão for de texto simples
+    if (btn.children.length === 0) btn.textContent = originalLabel(btn);
+    btn.removeAttribute("data-snp-since");
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "snp_cart_button_unstuck" });
+  }
+
+  // 2) rede de segurança: varre botões presos
+  setInterval(function () {
+    var btns = document.querySelectorAll(BTN_SELECTOR);
+    var now = Date.now();
+    for (var i = 0; i < btns.length; i++) {
+      var b = btns[i];
+      remember(b);
+      if (b.classList.contains(ADDING_CLASS)) {
+        var since = b.getAttribute("data-snp-since");
+        if (!since) { b.setAttribute("data-snp-since", now); }
+        else if (now - parseInt(since, 10) > STUCK_MS) { unstick(b); }
+      } else {
+        b.removeAttribute("data-snp-since");
+      }
+    }
+  }, 1000);
+})();
+</script>

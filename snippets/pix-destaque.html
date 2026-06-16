@@ -1,0 +1,137 @@
+<!--
+  SnippetsPro — Destaque de Preço no Pix
+  ======================================
+  O QUE FAZ: lê o preço exibido na página (produto e listagem) e injeta,
+  logo abaixo, um selo destacando o valor com desconto no Pix +
+  "X% OFF à vista". Atualiza sozinho quando o cliente troca a variação.
+
+  ONDE COLAR: Google Tag Manager → Tags → New → Tag Type "Custom HTML"
+  GATILHO (Trigger): "All Pages" (Page View) — o guard interno garante
+  que só roda onde existe preço.
+  Opção "Support document.write" = NÃO.
+
+  PERSONALIZAR (bloco CONFIG abaixo):
+    - PIX_DISCOUNT: desconto no Pix (0.05 = 5%, 0.10 = 10%...)
+    - PRICE_SELECTORS: onde está o preço no tema (já vem com os padrões
+      da Nuvemshop; some/troque se o tema for diferente)
+    - ACCENT / TEXT: cores do selo
+-->
+<script>
+(function () {
+  "use strict";
+
+  /* ============ CONFIG ============ */
+  var CONFIG = {
+    PIX_DISCOUNT: 0.05,                 // 5% no Pix — TROQUE pelo desconto real da loja
+    LABEL: "no Pix",                    // texto ao lado do valor
+    SUBLABEL: "à vista",               // texto pequeno do badge de %
+    ACCENT: "#1aab8a",                  // cor do selo (verde Pix)
+    TEXT: "#0b6b56",                    // cor do texto do valor
+    PRICE_SELECTORS: [                  // onde achar o preço (1º que casar vence)
+      "[data-store='product-price']",
+      ".js-price-display",
+      ".price-display",
+      "[itemprop='price']"
+    ],
+    CURRENCY: "R$",
+    DECIMAL: ",",                       // separador decimal exibido
+    THOUSANDS: "."                      // separador de milhar exibido
+  };
+  /* ============ /CONFIG ============ */
+
+  if (window.__snpPixLoaded) return;
+  window.__snpPixLoaded = true;
+
+  // CSS injetado uma vez
+  var css = ""
+    + ".snp-pix{display:inline-block;margin-top:6px;padding:6px 12px;border-radius:8px;"
+    +   "background:" + hexA(CONFIG.ACCENT, 0.10) + ";border:1px solid " + hexA(CONFIG.ACCENT, 0.35) + ";"
+    +   "font-family:inherit;line-height:1.2;}"
+    + ".snp-pix-val{font-size:18px;font-weight:800;color:" + CONFIG.TEXT + ";}"
+    + ".snp-pix-lbl{font-size:13px;font-weight:600;color:" + CONFIG.TEXT + ";margin-left:4px;}"
+    + ".snp-pix-off{display:inline-block;margin-left:8px;padding:2px 7px;border-radius:20px;"
+    +   "background:" + CONFIG.ACCENT + ";color:#fff;font-size:11px;font-weight:700;vertical-align:middle;}"
+    + ".snp-pix-ico{display:inline-block;width:13px;height:13px;vertical-align:-1px;margin-right:5px;}";
+  var st = document.createElement("style");
+  st.appendChild(document.createTextNode(css));
+  document.head.appendChild(st);
+
+  function hexA(hex, a) {
+    var h = hex.replace("#", "");
+    if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    var r = parseInt(h.substr(0,2),16), g = parseInt(h.substr(2,2),16), b = parseInt(h.substr(4,2),16);
+    return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+  }
+
+  // "R$ 199,90" / "199.90" / "1.299,00" -> Number(1299.00)
+  function parsePrice(txt) {
+    if (!txt) return NaN;
+    var s = ("" + txt).replace(/[^\d.,]/g, "");
+    if (!s) return NaN;
+    // se tem vírgula, ela é o decimal (padrão BR)
+    if (s.indexOf(",") > -1) s = s.replace(/\./g, "").replace(",", ".");
+    return parseFloat(s);
+  }
+
+  function fmt(n) {
+    var parts = n.toFixed(2).split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, CONFIG.THOUSANDS);
+    return CONFIG.CURRENCY + " " + parts[0] + CONFIG.DECIMAL + parts[1];
+  }
+
+  var PIX_ICON = '<svg class="snp-pix-ico" viewBox="0 0 24 24" fill="' + CONFIG.TEXT + '">'
+    + '<path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4Zm0 2.2 6 3v4.8c0 3.9-2.5 6.9-6 8-3.5-1.1-6-4.1-6-8V7.2l6-3Z"/>'
+    + '<path d="M10.6 13.4 8.8 11.6l-1.3 1.3 3.1 3.1 5.5-5.5-1.3-1.3-4.2 4.2Z"/></svg>';
+
+  function decorate(priceEl) {
+    if (!priceEl || priceEl.getAttribute("data-snp-done") === "1") return;
+    var val = parsePrice(priceEl.textContent);
+    if (isNaN(val) || val <= 0) return;
+    priceEl.setAttribute("data-snp-done", "1");
+
+    var pix = val * (1 - CONFIG.PIX_DISCOUNT);
+    var off = Math.round(CONFIG.PIX_DISCOUNT * 100);
+
+    var badge = document.createElement("div");
+    badge.className = "snp-pix";
+    badge.setAttribute("data-snp-badge", "1");
+    badge.innerHTML = PIX_ICON
+      + '<span class="snp-pix-val">' + fmt(pix) + '</span>'
+      + '<span class="snp-pix-lbl">' + CONFIG.LABEL + '</span>'
+      + '<span class="snp-pix-off">' + off + '% OFF ' + CONFIG.SUBLABEL + '</span>';
+
+    // insere logo após o preço (ou no fim do container do preço)
+    if (priceEl.parentNode) priceEl.parentNode.insertBefore(badge, priceEl.nextSibling);
+
+    // analytics
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "snp_pix_shown", pix_value: pix });
+  }
+
+  function scan() {
+    for (var i = 0; i < CONFIG.PRICE_SELECTORS.length; i++) {
+      var els = document.querySelectorAll(CONFIG.PRICE_SELECTORS[i]);
+      for (var j = 0; j < els.length; j++) decorate(els[j]);
+    }
+  }
+
+  // primeira passada + re-scan ao trocar variação (DOM muda)
+  function reset() {
+    var olds = document.querySelectorAll("[data-snp-badge]");
+    for (var i = 0; i < olds.length; i++) olds[i].parentNode && olds[i].parentNode.removeChild(olds[i]);
+    var done = document.querySelectorAll("[data-snp-done]");
+    for (var k = 0; k < done.length; k++) done[k].removeAttribute("data-snp-done");
+  }
+
+  scan();
+
+  if (window.MutationObserver) {
+    var t;
+    var obs = new MutationObserver(function () {
+      clearTimeout(t);
+      t = setTimeout(function () { reset(); scan(); }, 150);
+    });
+    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+})();
+</script>
