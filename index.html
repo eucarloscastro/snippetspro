@@ -90,6 +90,25 @@
   .shots img{width:100%;border:1px solid var(--line);border-radius:8px;display:block;background:#fff}
   .shots-cap{font-size:11px;color:var(--muted);text-align:center;padding:8px 0 0}
   .shots-cap b{color:var(--accent2)}
+  .shot-one{margin:14px 20px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+  .shot-one img{width:100%;display:block}
+  .shot-one .cap{background:var(--bg);color:var(--muted);font-size:11px;text-align:center;padding:7px 0;border-top:1px solid var(--line)}
+  .shot-one .cap b{color:var(--accent2)}
+  .lab{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);margin:16px 20px 4px}
+  .benefits{list-style:none;margin:0 20px;padding:0}
+  .benefits li{position:relative;padding:4px 0 4px 24px;font-size:13.5px;color:var(--txt)}
+  .benefits li::before{content:'✓';position:absolute;left:2px;top:4px;color:var(--accent2);font-weight:800}
+  .benefits li b{color:var(--txt)}
+  /* opções de instalação */
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .opt{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px}
+  .opt .h{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin-bottom:6px}
+  .opt .em{font-size:20px}
+  .opt p{font-size:13px;color:var(--muted)}
+  .opt .tagopt{display:inline-block;margin-bottom:8px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:20px}
+  .opt-diy .tagopt{background:rgba(244,183,64,.14);color:var(--gold)}
+  .opt-dfy .tagopt{background:rgba(26,171,138,.16);color:var(--accent2)}
+  @media(max-width:560px){.opts{grid-template-columns:1fr}}
 
   .card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 20px;flex-wrap:wrap}
   .price{font-size:15px;color:var(--muted)}
@@ -154,9 +173,9 @@
 
 <!-- =============== HERO =============== -->
 <section class="hero wrap">
-  <span class="pill">Sem senha · Sem risco · Sem mexer no tema</span>
+  <span class="pill">Pagamento único · Sem mexer no tema · Você instala ou eu instalo</span>
   <h1>Personalizações que <span class="accent">vendem mais</span> na sua loja — sem mexer no seu site</h1>
-  <p>Você me manda o link da sua loja. Eu gero um código sob medida. Você cola no Google Tag Manager em 2 minutos. Pronto: funciona na hora, e dá pra remover quando quiser.</p>
+  <p>Você me manda o link da sua loja. Eu gero o código sob medida. Aí <b>você instala</b> em 2 minutos <b>ou me delega o acesso e eu instalo pra você</b>. Paga uma vez e o código é seu pra sempre.</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="#catalogo">Ver o catálogo ↓</a>
     <a class="btn btn-ghost" href="https://wa.me/5511963429300?text=Oi!%20Quero%20uma%20personaliza%C3%A7%C3%A3o%20pra%20minha%20loja." target="_blank" rel="noopener">Falar comigo</a>
@@ -170,14 +189,27 @@
   <div class="steps">
     <div class="step"><div class="n">1</div><h3>Você me manda o site</h3><p>O link da sua loja e o que você quer destacar.</p></div>
     <div class="step"><div class="n">2</div><h3>Eu gero o código</h3><p>Adaptado ao seu tema, testado antes de entregar.</p></div>
-    <div class="step"><div class="n">3</div><h3>Você cola no GTM</h3><p>Um "copiar e colar". Eu te mando o passo a passo.</p></div>
+    <div class="step"><div class="n">3</div><h3>Vai pro ar</h3><p>Você instala ou eu instalo. Funciona na hora.</p></div>
+  </div>
+
+  <div class="opts">
+    <div class="opt opt-diy">
+      <span class="tagopt">Opção 1 · faça você</span>
+      <div class="h"><span class="em">📋</span> Eu passo, você instala</div>
+      <p>Te mando o código + um passo a passo com print (e vídeo, se quiser). É um "copiar e colar" no seu Google Tag Manager. Leva ~2 minutos.</p>
+    </div>
+    <div class="opt opt-dfy">
+      <span class="tagopt">Opção 2 · eu faço</span>
+      <div class="h"><span class="em">🤝</span> Você delega, eu instalo</div>
+      <p>Não curte mexer em ferramenta? Você me dá acesso de <b>Editor</b> no seu GTM, eu configuro tudo e te aviso quando estiver no ar. Você revoga o acesso quando quiser. <a href="#faq" style="color:var(--accent2)">Como funciona o acesso →</a></p>
+    </div>
   </div>
 </section>
 
 <!-- =============== CATÁLOGO =============== -->
 <section class="section wrap" id="catalogo">
   <h2>Catálogo de snippets</h2>
-  <p class="sub">Preço fixo, código real, demonstração antes/depois. Sem surpresa.</p>
+  <p class="sub">Código real, rodando ao vivo. Você <b>paga uma vez</b> — é seu pra sempre, sem mensalidade.</p>
 
   <div class="cards">
 
@@ -195,29 +227,84 @@
         </div>
         <div class="shots-cap"><b>Print real</b> · loja Baixa Pace</div>
       </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li>Cria <b>percepção de desconto</b> e ancora o preço pra baixo</li>
+        <li>Incentiva o pagamento à vista — <b>menos taxa de cartão</b> pra você</li>
+        <li>Empurra a decisão de compra e <b>aumenta a conversão</b></li>
+      </ul>
       <div class="card-foot">
-        <div class="price"><b>R$ 147</b> · à vista</div>
+        <div class="price"><b>R$ 147</b> · pagamento único</div>
         <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Destaque%20do%20pre%C3%A7o%20no%20Pix%20(R%24147)%20pra%20minha%20loja.">Quero esse</a>
       </div>
     </article>
 
-    <!-- FIX ADD TO CART -->
+    <!-- ESTOQUE TEMPO REAL -->
     <article class="card">
       <div class="card-top">
-        <div class="card-title">🛒 Destravar "Adicionar ao carrinho"</div>
-        <span class="card-tag tag-ready">Pronto</span>
+        <div class="card-title">📦 Estoque em tempo real</div>
+        <span class="card-tag tag-ready">Ao vivo</span>
       </div>
-      <p class="card-desc">Botão que congela em "Incluindo..." e nunca volta? É bug de tema que faz o cliente desistir. Esse código destrava o botão e devolve a venda — sem reescrever o tema.</p>
-      <div class="demo">
-        <div class="shots">
-          <figure><figcaption class="lb-antes">● Antes — travado</figcaption><img src="assets/cart-antes.png" alt="Botão preso em Incluindo..." loading="lazy"></figure>
-          <figure><figcaption class="lb-depois">● Depois — destravado</figcaption><img src="assets/cart-depois.png" alt="Botão Adicionar ao carrinho funcionando" loading="lazy"></figure>
-        </div>
-        <div class="shots-cap"><b>Print real</b> · botão volta sozinho em ~2,5s</div>
+      <p class="card-desc">Mostra o estoque real na página do produto. Quando sobra pouco (menos de 10), vira um alerta vermelho de escassez. Quando tem bastante, passa segurança de "pronto pra envio".</p>
+      <div class="shot-one">
+        <img src="assets/w-estoque.png" alt="Alerta: Restam apenas 1 unidade — garanta já!" loading="lazy">
+        <div class="cap"><b>Print real</b> · rodando ao vivo na Baixa Pace</div>
       </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li>Gera <b>escassez e urgência</b> quando o estoque está baixo (&lt;10)</li>
+        <li>Passa <b>segurança</b> de "tem em estoque, envio rápido"</li>
+        <li>Reduz a procrastinação — o cliente compra <b>agora</b></li>
+      </ul>
       <div class="card-foot">
-        <div class="price"><b>R$ 297</b> · à vista</div>
-        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Destravar%20Adicionar%20ao%20carrinho%20(R%24297)%20pra%20minha%20loja.">Quero esse</a>
+        <div class="price"><b>R$ 147</b> · pagamento único</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Estoque%20em%20tempo%20real%20(R%24147)%20pra%20minha%20loja.">Quero esse</a>
+      </div>
+    </article>
+
+    <!-- SELOS DE CONFIANÇA -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">🛡️ Selos de confiança</div>
+        <span class="card-tag tag-ready">Ao vivo</span>
+      </div>
+      <p class="card-desc">Bloco de selos na página do produto — Compra Segura, Troca Fácil, Envio Rápido e Produto Original — pra quebrar a desconfiança de quem nunca comprou na sua loja.</p>
+      <div class="shot-one">
+        <img src="assets/w-selos.png" alt="Selos: Compra Segura, Troca Fácil, Envio Rápido, Produto Original" loading="lazy">
+        <div class="cap"><b>Print real</b> · rodando ao vivo na Baixa Pace</div>
+      </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li>Quebra o <b>medo de comprar</b> de loja desconhecida</li>
+        <li>Passa <b>credibilidade</b> no momento da decisão</li>
+        <li>Reduz abandono por insegurança</li>
+      </ul>
+      <div class="card-foot">
+        <div class="price"><b>R$ 147</b> · pagamento único</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Selos%20de%20confian%C3%A7a%20(R%24147)%20pra%20minha%20loja.">Quero esse</a>
+      </div>
+    </article>
+
+    <!-- COMPRA SEM RISCO -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">✅ Bloco "Compra sem risco"</div>
+        <span class="card-tag tag-ready">Ao vivo</span>
+      </div>
+      <p class="card-desc">Um bloco curto que responde a objeção nº1 antes da compra: "e se não servir / não gostar?". Destaca troca fácil, garantia e envio — exatamente onde bate a dúvida.</p>
+      <div class="shot-one">
+        <img src="assets/w-semrisco.png" alt="Bloco Compra sem risco com troca fácil e garantia" loading="lazy">
+        <div class="cap"><b>Print real</b> · rodando ao vivo na Baixa Pace</div>
+      </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li>Derruba a objeção de <b>troca e garantia</b> na hora</li>
+        <li>Diminui o medo de "errar a compra"</li>
+        <li>Funciona junto com os selos pra reforçar confiança</li>
+      </ul>
+      <div class="card-foot">
+        <div class="price"><b>R$ 147</b> · pagamento único</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Compra%20sem%20risco%20(R%24147)%20pra%20minha%20loja.">Quero esse</a>
       </div>
     </article>
 
@@ -235,35 +322,84 @@
         </div>
         <div class="shots-cap"><b>Print real</b> · rodando ao vivo na Baixa Pace</div>
       </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li><b>Recupera tráfego</b> que cairia numa página de erro</li>
+        <li>Reaproveita o clique do anúncio que você já pagou</li>
+        <li>Vira venda quem chegou num link quebrado ou esgotado</li>
+      </ul>
       <div class="card-foot">
-        <div class="price"><b>R$ 497</b> · à vista</div>
+        <div class="price"><b>R$ 497</b> · pagamento único</div>
         <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20P%C3%A1gina%20404%20de%20Resgate%20(R%24497)%20pra%20minha%20loja.">Quero esse</a>
       </div>
     </article>
 
-    <!-- FRETE GRÁTIS (em breve) -->
+    <!-- FRETE GRÁTIS -->
     <article class="card">
       <div class="card-top">
-        <div class="card-title">🚚 Barra de frete grátis</div>
-        <span class="card-tag tag-soon">Em breve</span>
+        <div class="card-title">🚚 Frete grátis em destaque</div>
+        <span class="card-tag tag-ready">Ao vivo</span>
       </div>
-      <p class="card-desc">"Faltam R$ 39 pra você ganhar frete grátis" — barra de progresso que aumenta o ticket médio. Já posso fazer sob encomenda; me chama no WhatsApp.</p>
+      <p class="card-desc">Linha fixa avisando a partir de quanto o frete sai de graça. Pode virar barra de progresso ("faltam R$ 39 pra frete grátis") pra empurrar o cliente a colocar mais no carrinho.</p>
+      <div class="shot-one">
+        <img src="assets/w-frete.png" alt="Linha: Enviamos para todo o Brasil, frete grátis acima de R$ 250" loading="lazy">
+        <div class="cap"><b>Print real</b> · rodando ao vivo na Baixa Pace</div>
+      </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li>Incentiva o cliente a <b>subir o carrinho</b> pra ganhar frete</li>
+        <li><b>Aumenta o ticket médio</b> de cada pedido</li>
+        <li>Reduz abandono por surpresa no frete</li>
+      </ul>
       <div class="card-foot">
-        <div class="price"><b>R$ 147</b> · à vista</div>
-        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Tenho%20interesse%20na%20Barra%20de%20frete%20gr%C3%A1tis%20(R%24147).">Tenho interesse</a>
+        <div class="price"><b>R$ 147</b> · pagamento único</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Frete%20gr%C3%A1tis%20em%20destaque%20(R%24147)%20pra%20minha%20loja.">Quero esse</a>
       </div>
     </article>
 
-    <!-- PROVA SOCIAL (em breve) -->
+    <!-- BOTÃO DE COMPRA -->
     <article class="card">
       <div class="card-top">
-        <div class="card-title">🔥 Prova social dinâmica</div>
-        <span class="card-tag tag-soon">Em breve</span>
+        <div class="card-title">🎯 Botão de compra turbinado</div>
+        <span class="card-tag tag-ready">Ao vivo</span>
       </div>
-      <p class="card-desc">"12 pessoas compraram nas últimas 24h" e selos de confiança no checkout. Aumenta a conversão com urgência real. Sob encomenda.</p>
+      <p class="card-desc">Deixa o botão de compra mais visível e persuasivo: texto, cor e destaque sob medida, posição reorganizada e barra fixa no celular pra ele estar sempre à mão na hora de comprar.</p>
+      <div class="shot-one">
+        <img src="assets/cart-depois.png" alt="Botão de compra em destaque" loading="lazy">
+        <div class="cap"><b>Print real</b> · botão da loja Baixa Pace</div>
+      </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li>Mais <b>destaque no CTA</b> = mais cliques pra comprar</li>
+        <li>Barra fixa no mobile: botão <b>sempre à vista</b></li>
+        <li>Menos fricção entre "quero" e "comprei"</li>
+      </ul>
       <div class="card-foot">
-        <div class="price"><b>R$ 147</b> · à vista</div>
-        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Tenho%20interesse%20na%20Prova%20social%20din%C3%A2mica%20(R%24147).">Tenho interesse</a>
+        <div class="price"><b>R$ 197</b> · pagamento único</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20Bot%C3%A3o%20de%20compra%20turbinado%20(R%24197)%20pra%20minha%20loja.">Quero esse</a>
+      </div>
+    </article>
+
+    <!-- FAQ NO PRODUTO -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-title">❓ FAQ na página do produto</div>
+        <span class="card-tag tag-ready">Ao vivo</span>
+      </div>
+      <p class="card-desc">Bloco de perguntas e respostas direto na página do produto, respondendo as dúvidas que travam a compra (frete, troca, garantia, promoções) sem o cliente precisar sair pra perguntar.</p>
+      <div class="shot-one">
+        <img src="assets/w-faq.png" alt="Bloco de FAQ na página do produto" loading="lazy">
+        <div class="cap"><b>Print real</b> · rodando ao vivo na Baixa Pace</div>
+      </div>
+      <span class="lab">Que benefício gera</span>
+      <ul class="benefits">
+        <li>Responde objeções <b>na hora</b>, sem o cliente sair da página</li>
+        <li>Segura quem ia embora tirar dúvida</li>
+        <li>Conteúdo extra que <b>ajuda no Google (SEO)</b></li>
+      </ul>
+      <div class="card-foot">
+        <div class="price"><b>R$ 197</b> · pagamento único</div>
+        <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5511963429300?text=Quero%20o%20snippet%20FAQ%20na%20p%C3%A1gina%20do%20produto%20(R%24197)%20pra%20minha%20loja.">Quero esse</a>
       </div>
     </article>
 
@@ -282,14 +418,14 @@
 
   </div>
 
-  <!-- RECORRENTE -->
+  <!-- PAGAMENTO ÚNICO -->
   <div class="rec" style="margin-top:16px">
-    <div class="ic">🛡️</div>
+    <div class="ic">♾️</div>
     <div>
-      <h3>Garantia + Ajustes</h3>
-      <p>Se o seu tema atualizar e algum snippet parar, eu conserto. Plano opcional de manutenção.</p>
+      <h3>Pague uma vez. É seu pra sempre.</h3>
+      <p>Sem mensalidade, sem assinatura, sem pegadinha. Você paga uma vez pelo snippet e o código fica seu — pra usar enquanto quiser.</p>
     </div>
-    <div class="rp accent">R$ 47<span style="font-size:13px;color:var(--muted)">/mês</span></div>
+    <div class="rp accent">R$ 0<span style="font-size:13px;color:var(--muted)">/mês</span></div>
   </div>
 </section>
 
@@ -298,22 +434,24 @@
   <div class="proof">
     <span class="pill" style="background:rgba(26,171,138,.14);color:var(--accent2)">Resultado real</span>
     <div class="proof-grid">
-      <div class="stat"><b>+977</b><span>cliques mortos recuperados num único bug de botão</span></div>
-      <div class="stat"><b>2,5s</b><span>pra botão travado voltar a funcionar</span></div>
-      <div class="stat"><b>0</b><span>acessos ao seu tema ou senha</span></div>
+      <div class="stat"><b>8+</b><span>snippets rodando ao vivo numa loja real</span></div>
+      <div class="stat"><b>~2min</b><span>pra instalar — ou eu instalo pra você</span></div>
+      <div class="stat"><b>0</b><span>acesso ao seu tema, FTP ou senha</span></div>
     </div>
-    <q style="margin-top:20px">"Esses códigos foram criados e validados ao vivo numa loja real de e-commerce, no tráfego de verdade — não em teoria."</q>
+    <q style="margin-top:20px">"Todos os prints deste site são reais, capturados ao vivo numa loja de e-commerce de verdade — não é mockup."</q>
   </div>
 </section>
 
 <!-- =============== FAQ =============== -->
-<section class="section wrap faq">
+<section class="section wrap faq" id="faq">
   <h2 style="margin-bottom:22px">Perguntas frequentes</h2>
+  <details><summary>Eu pago uma vez só ou é mensalidade?</summary><p><b>Pagamento único.</b> Você paga uma vez pelo snippet e o código é seu pra sempre. Sem assinatura, sem mensalidade, sem cobrança recorrente.</p></details>
+  <details><summary>Não entendo de Tag Manager. Tem problema?</summary><p>Nenhum. Você escolhe: <b>(1)</b> eu te mando o código com um passo a passo (print + vídeo) e você cola — leva ~2 min; ou <b>(2)</b> você me delega o acesso e eu instalo tudo pra você. Do jeito que for mais confortável.</p></details>
+  <details><summary>Como funciona te dar acesso ao meu GTM? É seguro?</summary><p>É bem seguro e simples. No seu Google Tag Manager você vai em <b>Administrador → Gerenciamento de usuários → convidar</b>, coloca o meu e-mail e me dá permissão de <b>Editor</b> (só do container, não da sua conta Google). Com isso eu instalo e testo os snippets. <b>Você revoga o acesso a qualquer momento</b> com um clique, e eu nunca tenho acesso à sua senha, ao seu e-mail ou ao painel da sua loja — só ao GTM, que é uma camada separada do seu site.</p></details>
   <details><summary>Funciona na minha plataforma?</summary><p>Funciona em qualquer loja que aceite Google Tag Manager — Nuvemshop, Shopify, Loja Integrada, Tray, WooCommerce e outras. Me manda o link que eu confirmo antes de cobrar.</p></details>
-  <details><summary>Preciso te dar acesso ao meu painel?</summary><p>Não. Você só cola o código no seu próprio Google Tag Manager. Nenhuma senha, nenhum FTP, nenhum acesso ao tema.</p></details>
-  <details><summary>E se eu quiser remover depois?</summary><p>É só apagar a tag no GTM. Nada fica gravado no seu tema, então a remoção é instantânea e sem rastro.</p></details>
-  <details><summary>Quanto tempo demora a entrega?</summary><p>Snippets prontos saem em até 48h depois que recebo seu link. Os "sob encomenda" eu confirmo o prazo no WhatsApp.</p></details>
-  <details><summary>Como eu pago?</summary><p>Pix à vista. Você recebe o código + o passo a passo de instalação. Se precisar, eu instalo junto com você por chamada.</p></details>
+  <details><summary>Mexe no meu tema? E se eu quiser remover depois?</summary><p>Não mexe no tema. Tudo roda pelo GTM, por cima do site. Pra remover é só apagar a tag no GTM — instantâneo e sem deixar rastro no seu tema.</p></details>
+  <details><summary>Quanto tempo demora a entrega?</summary><p>Os snippets prontos saem em até 48h depois que recebo seu link. Personalizações sob medida eu confirmo o prazo no WhatsApp.</p></details>
+  <details><summary>Como eu pago?</summary><p>Pix. Você recebe o código + o passo a passo de instalação (ou eu instalo, se preferir a opção 2).</p></details>
 </section>
 
 <!-- =============== CTA FINAL =============== -->
